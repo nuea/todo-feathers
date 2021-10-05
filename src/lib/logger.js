@@ -1,6 +1,6 @@
 const { createLogger, format, transports } = require('winston');
 const path = require('path');
-const env = require('../config/server');
+const env = require('../../config/default');
 
 const logger = createLogger({
     // change level if in dev environment versus production

@@ -3,7 +3,12 @@ module.exports = {
     before: {
         all: [],
         find: [],
-        get: [],
+        get: [
+                async context => {
+                // console.log(context);
+                console.log('Hook Before Get: ',context.method, `/${context.path}`, `id: ${context.id}`)
+            }
+        ],
         create: [],
         update: [],
         patch: [],
@@ -14,7 +19,7 @@ module.exports = {
         all: [
             async context => {
                 // console.log(context);
-                console.log(context.method, `/${context.path}`)
+                console.log('Hook After: ',context.method, `/${context.path}`)
             } 
         ],
         find: [],

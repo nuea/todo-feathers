@@ -1,0 +1,15 @@
+{
+  "HOST": "localhost",
+  "PORT": 3030,
+  "LIMIT": "50mb",
+
+  "MONGO_URL": "localhost",
+  "MONGO_PORT": 27017,
+  "MONGO_DB": "store",
+  "PAGINATE": {
+    "default": 10,
+    "max": 50
+  },
+
+  "NODE_ENV": "development"
+}
