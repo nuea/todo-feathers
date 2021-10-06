@@ -14,8 +14,8 @@ exports.BookStore = class BookStore extends Service {
 
     async get(id, params) {
         // console.log(id)
-        super._get(id).then(a => setTimeout(() => {  console.log(a, "async") }, 2000)) // async
-        console.log(await super._get(id), "sync") // sync
+        // super._get(id).then(a => setTimeout(() => {  console.log(a, "async") }, 2000)) // async
+        // console.log(await super._get(id), "sync") // sync
 
         return super._get(id);
     }

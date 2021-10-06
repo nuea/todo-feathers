@@ -1,5 +1,5 @@
 const { BookStore } = require('./book-store.class')
-const model = require('../../../model/book.model')
+const model = require('../../../models/book.model')
 const hook = require('./book-store.hook')
 const { PAGINATE } = require('../../../../config/default');
 
