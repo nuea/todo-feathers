@@ -1,6 +1,5 @@
 const { Service } = require('feathers-mongoose');
 const { GeneralError, NotFound, BadRequest, PaymentError } = require("@feathersjs/errors")
-// const { NotFoundRequest } = require('../../../helper/failure')
 
 exports.BookStore = class BookStore extends Service {
     constructor(options, app){
@@ -17,13 +16,17 @@ exports.BookStore = class BookStore extends Service {
     }
     
     
-    // async create (data, params) {
-    //     console.log('This create');
-    //     if (Array.isArray(data)) {
-    //       return Promise.all(data.map(current => this.create(current, params)));
-    //     }
-    //     return data;
-    // }
+    async create (data, params) {
+        const result = super.create(data).catch(err => {
+                throw new BadRequest(err.errors.title.properties.message);
+                if (err.code === 400) {
+                    throw new BadRequest(err.errors.title.properties.message);
+                }
+                throw new GeneralError(err);
+        });
+        
+        return result;
+    }
     
 
 };
