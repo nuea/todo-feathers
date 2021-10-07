@@ -1,4 +1,4 @@
-// const errors = require("@feathersjs/errors");
+
 module.exports = {
     before: {
         all: [],
