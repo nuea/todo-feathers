@@ -1,5 +1,7 @@
 const { Service } = require('feathers-mongoose');
-const { GeneralError, NotFound, BadRequest, PaymentError } = require("@feathersjs/errors")
+const mongoose = require('mongoose');
+const { GeneralError, NotFound, BadRequest, PaymentError } = require("@feathersjs/errors");
+const app = require('../../../app');
 
 exports.BookStore = class BookStore extends Service {
     constructor(options, app){
@@ -12,21 +14,28 @@ exports.BookStore = class BookStore extends Service {
     }
 
     async get(id, params) {
-        return super._get(id);
+        return super.Model.aggregate([
+            { $match: { _id:  mongoose.Types.ObjectId(`${id}`) } },
+            { $project: {
+                    _id: 1,
+                    title : 1,
+                    description: 1,
+                    image: 1,
+                    price: 1
+                }
+            },
+        ])
+        // return super._get(id);
     }
     
-    
     async create (data, params) {
-        const result = super.create(data).catch(err => {
+        return super.create(data).catch(err => {
                 throw new BadRequest(err.errors.title.properties.message);
                 if (err.code === 400) {
                     throw new BadRequest(err.errors.title.properties.message);
                 }
                 throw new GeneralError(err);
-        });
-        
-        return result;
+        }).then(d => super.get(d._id, params));
     }
     
-
 };
