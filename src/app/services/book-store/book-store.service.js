@@ -1,6 +1,7 @@
 const { BookStore } = require('./book-store.class')
 const model = require('../../../models/book.model')
 const hook = require('./book-store.hook')
+const logger = require('../../../lib/logger')
 const { PAGINATE } = require('../../../../config/default');
 
 module.exports = app => {
@@ -18,11 +19,7 @@ module.exports = app => {
     service.hooks(hook);
     
     app.service('book-store').on('created', data => {
-        console.log("Book store created !!!!")
-    })
-
-    app.service('book-store').on('removed', data => {
-        console.log("Book store removed !!!!")
+        logger.info("Finished creating a book !!!!")
     })
 
 }

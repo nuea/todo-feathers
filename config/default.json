@@ -11,5 +11,11 @@
     "max": 50
   },
 
-  "NODE_ENV": "development"
+  "NODE_ENV": "development",
+
+  "BOOK_STATUS": {
+    "PENDING": "Pending",
+    "COMPLETE": "Complete",
+    "REJECT": "Reject"
+  }
 }

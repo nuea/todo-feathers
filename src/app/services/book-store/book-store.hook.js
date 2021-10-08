@@ -1,4 +1,5 @@
 const { NotFound, GeneralError, BadRequest } = require('@feathersjs/errors');
+const { BOOK_STATUS } = require('../../../../config/default.json');
 
 module.exports = {
     before: {
@@ -8,8 +9,11 @@ module.exports = {
         create: [
             async context => {
                 console.log(`Hook Before --> Method: ${context.method}, Path: /${context.path}`)
-                if(context.data.title.trim() === '' || context.data.price.trim() === '') {
-                    throw new BadRequest('Title or Price is empty');
+                context.data.status = BOOK_STATUS.PENDING
+                if (context.data.book_id.trim() === '') {
+                    throw new NotFound('Book ID is empty');
+                } else if (context.data.book_name.trim() === ''){
+                    throw new NotFound('Book Name is empty');
                 }
             }
         ],

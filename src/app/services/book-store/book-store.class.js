@@ -10,32 +10,44 @@ exports.BookStore = class BookStore extends Service {
     }
 
     async find (params){
-        return super._find(params);
+        return super.Model.aggregate([
+            {   $project: {
+                    _id: 1,
+                    book_id: 1,
+                    book_name: 1,
+                    title: 1,
+                    description: 1,
+                    image: 1,
+                    price: 1,
+                    status: 1
+                }
+            }
+        ]);
     }
 
     async get(id, params) {
-        return super.Model.aggregate([
-            { $match: { _id:  mongoose.Types.ObjectId(`${id}`) } },
-            { $project: {
-                    _id: 1,
-                    title : 1,
-                    description: 1,
-                    image: 1,
-                    price: 1
-                }
-            },
-        ])
-        // return super._get(id);
+        return super._get(id);
     }
     
     async create (data, params) {
         return super.create(data).catch(err => {
-                throw new BadRequest(err.errors.title.properties.message);
-                if (err.code === 400) {
-                    throw new BadRequest(err.errors.title.properties.message);
-                }
-                throw new GeneralError(err);
-        }).then(d => super.get(d._id, params));
+            if (err.code == 400) {
+                throw new BadRequest('Bad Request')
+            }
+            throw new GeneralError()
+        });
+    }
+
+    async update (id, data, params) {
+        return data;
+    }
+    
+    async patch (id, data, params) {
+        return data;
+    }
+    
+    async remove (id, params) {
+        return  {id};
     }
     
 };

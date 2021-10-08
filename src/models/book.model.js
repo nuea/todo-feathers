@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
 
 const bookSchema = new mongoose.Schema({
-    // book_id: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   required: true,
-    //   default: ,
-    //   index: true
-    // },
+    book_id: {
+      type: String,
+      required: true,
+      index: true
+    },
+    book_name : {
+      type: String,
+      required: true
+    },
     title : { 
       type: String,
       required: true
