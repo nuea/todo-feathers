@@ -1,21 +1,16 @@
 {
-  "HOST": "localhost",
-  "PORT": 3030,
-  "LIMIT": "50mb",
-
-  "MONGO_URL": "localhost",
-  "MONGO_PORT": 27017,
-  "MONGO_DB": "store",
-  "PAGINATE": {
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
     "default": 10,
     "max": 50
   },
-
-  "NODE_ENV": "development",
-
-  "BOOK_STATUS": {
-    "PENDING": "Pending",
-    "COMPLETE": "Complete",
-    "REJECT": "Reject"
+  "mongodb": "mongodb://localhost:27017/todo_feathers",
+  "node_env": "development",
+  "book_status": {
+    "pending": "Pending",
+    "complete": "Complete",
+    "reject": "Reject"
   }
 }
