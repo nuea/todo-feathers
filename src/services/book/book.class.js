@@ -39,7 +39,7 @@ exports.Book = class Book extends Service {
         price: 1,
         status: 1
       }},
-      { $group: { _id: '$book_name', total: { $sum: '$price' } } }
+      { $group: { _id: '$book_name', total_amount: { $sum: '$price' } } }
     ];
     return super.Model.aggregate(query);
   }
@@ -61,7 +61,7 @@ exports.Book = class Book extends Service {
     try {
       const doc = await super._get(id);
       const dataUpdate = {...doc, ...data}; // replace data
-      return await super._patch(id, dataUpdate); //{id, data};      
+      return await super._patch(id, dataUpdate); 
     } catch (error) {
       if (error.code === 400) {
         throw new BadRequest('Bad Request');
